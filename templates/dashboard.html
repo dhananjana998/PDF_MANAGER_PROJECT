@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-xl font-bold mb-4">Dashboard</h1>
+
+<h2 class="text-lg font-semibold mt-4">Create New PDF</h2>
+<form method="POST" action="/create" class="bg-white p-4 mb-4 rounded shadow">
+    <input name="filename" placeholder="PDF file name" class="w-full mb-2 p-2 border rounded" />
+    <textarea name="content" placeholder="PDF content" class="w-full mb-2 p-2 border rounded"></textarea>
+    <button class="bg-green-600 text-white px-4 py-2 rounded">Create PDF</button>
+</form>
+
+<h2 class="text-lg font-semibold mt-6">Upload PDF</h2>
+<form method="POST" action="/upload" enctype="multipart/form-data" class="bg-white p-4 mb-4 rounded shadow">
+    <input type="file" name="file" class="w-full mb-2 p-2 border rounded" />
+    <button class="bg-purple-600 text-white px-4 py-2 rounded">Upload</button>
+</form>
+
+<h2 class="text-lg font-semibold mt-6">Available PDFs</h2>
+<ul class="bg-white p-4 rounded shadow">
+{% for pdf in pdfs %}
+    <li class="mb-2">
+        <strong>{{ pdf }}</strong>
+        <a href="/read/{{ pdf }}" class="text-blue-600 ml-4">Read</a>
+        <a href="/delete/{{ pdf }}" class="text-red-600 ml-2">Delete</a>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
